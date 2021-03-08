@@ -48,14 +48,17 @@ class VisitSDJpaServiceTest {
 
     @Test
     void findById() {
-        //given
+        //GIVEN
+        // Enables stubbing methods. Use it when you want the mock to return particular value when particular method is called.
         Visit visit = new Visit();
         given(visitRepository.findById(anyLong())).willReturn(Optional.of(visit));
 
-        //when
+        //WHEN
         Visit foundVisit = service.findById(1L);
 
-        //then
+        //THEN
+        // It enables the BDD style verification of mock behavior.
+        // make sure that specified methods are called
         then(visitRepository).should().findById(anyLong());
         assertThat(foundVisit).isNotNull();
     }
